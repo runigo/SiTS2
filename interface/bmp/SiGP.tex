@@ -1,0 +1,390 @@
+% SiCP
+%
+% Librement inspiré de
+% TeXtronics oscilloscope
+% Author: Hugues Vermeiren
+% http://www.texample.net/tikz/examples/textronics-oscilloscope/
+\documentclass[a4paper,12pt,oneside]{article}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage[active,tightpage]{preview}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[greek, frenchb]{babel}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{0pt}
+%
+\begin{document}
+\def\scl{0.6}%scaling factor of the picture
+\sffamily
+\begin{tikzpicture}[
+  scale=\scl,
+  panneaucontroles/.style={yellow!30!brown!20!,rounded corners,draw=black,thick},
+  lumiereeteinte/.style={yellow!40!brown!30!,draw=yellow!40!brown!100!,thin},
+  lumiererectangle/.style={yellow!40!black!30!,draw=yellow!40!black!60!,thin},
+  petitbouton/.style={white,draw=black, thick}]
+%
+%
+%        ECRAN
+%
+    \fill[white,draw=black,thick](-21,-5) rectangle (28,30.9);
+%
+%
+%        ENCEINTE
+%
+  %  \fill[white,draw=black,thick](-20,10.4) rectangle (19,29.9);
+%
+	% CAPTEURS HAUT
+    \def\hauteur{3.7}
+%   AXES TEMPÉRATURE
+  \begin{scope}[xshift=-16.7 cm,yshift=\hauteur cm]
+    % Draw axes
+    \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$temp\acute{e}rature$}
+        |- (9,0) node (xaxis) [right] {$t$};
+  \end{scope}
+%   AXES NOMBRE
+  \begin{scope}[xshift=-4.7 cm,yshift=\hauteur cm]
+    % Draw axes
+    \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$nombre$}
+        |- (9,0) node (xaxis) [right] {$t$};
+  \end{scope}
+%   AXES LIBRE PARCOURS MOYE
+  \begin{scope}[xshift=7.7 cm,yshift=\hauteur cm]
+    % Draw axes
+    \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$libre\ parcours\ moyen$}
+        |- (9,0) node (xaxis) [right] {$t$};
+  \end{scope}
+%
+	% CAPTEURS BAS
+    \def\hauteur{-3.9}
+%   AXES ÉNERGIE
+  \begin{scope}[xshift=-16.7 cm,yshift=\hauteur cm]
+    % Draw axes
+    \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$\acute{e}nergie$}
+        |- (9,0) node (xaxis) [right] {$t$};
+  \end{scope}
+%   AXES PRESSION
+  \begin{scope}[xshift=-4.7 cm,yshift=\hauteur cm]
+    % Draw axes
+    \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$pression$}
+        |- (9,0) node (xaxis) [right] {$t$};
+  \end{scope}
+%   AXES DENSITÉ D'ÉNERGIE
+ % \begin{scope}[xshift=7.7 cm,yshift=\hauteur cm]
+ %   % Draw axes
+ %   \draw [<->,draw=gray,thick] (0,5) node (yaxis) [above] {$densit\acute{e}$}
+ %       |- (9,0) node (xaxis) [right] {$\acute{e}nergie$};
+ % \end{scope}
+%
+%
+%      PANNEAU  DROIT
+%
+  \fill[panneaucontroles] (20.1,-4.5) rectangle (27.6,5.1);
+%
+%
+%        VITESSE DE LA SIMULATION
+%
+  \begin{scope}[xshift=22.7 cm,yshift=2.7cm]
+    \fill[petitbouton] (3.5,-2.05) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-1.37) {\Large{max}};
+    \fill[petitbouton] (3.5,-0.57) circle (0.3cm);
+    \node[scale=\scl] at (3.5,0.05) {\Large{min}};
+    \fill[petitbouton] (3.5,0.85) circle (0.3cm);
+    \node[scale=\scl] at (3.5,1.55) {\Large{Pause}};
+  %  \fill[petitbouton] (3.5,2.35) circle (0.3cm);
+  %  \node[scale=\scl] at (3.5,2.95) {\Large{Marche}};
+  \end{scope}
+%
+  \begin{scope}[xshift=22.7 cm,yshift=2.4cm,scale=0.75]
+    \node[scale=\scl] at (0,2.6) {\Large \textbf{Simulation}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+%
+%        NOMBRE
+%
+  \begin{scope}[xshift=22.7 cm,yshift=-1.7cm]
+    \fill[blue!30!black!60!,draw=black,thick] (3.5,-1.35) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-0.57) {\Large{Thermo.}};
+    \fill[blue!30!black!60!,draw=black,thick] (3.5,0.27) circle (0.3cm);
+    \node[scale=\scl] at (3.5,0.95) {\Large{Initialise}};
+  \end{scope}
+%
+  \begin{scope}[xshift=22.7 cm,yshift=-2.1cm,scale=0.75]
+    \node[scale=\scl] at (0,2.6) {\Large \textbf{Nombre}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+%
+%
+%      PANNEAU  TROU
+%
+  \fill[panneaucontroles] (20.1,21.8) rectangle (27.6,30.4);
+  \begin{scope}[xshift=22.7 cm,yshift=26.4cm]
+    \fill[petitbouton] (3.5,-3.05) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-2.25) {\Large \textbf{Supprim.}};
+    \fill[petitbouton] (3.5,-1.35) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-0.55) {\Large{Démon}};
+    \fill[petitbouton] (3.5,0.45) circle (0.3cm);
+    \node[scale=\scl] at (3.5,1.25) {\Large{Trou}};
+    \fill[petitbouton] (3.5,2.15) circle (0.3cm);
+    \node[scale=\scl] at (3.5,2.95) {\Large \textbf{Cloison}};
+  \end{scope}
+
+  \begin{scope}[xshift=22.7 cm,yshift=27.5cm,scale=0.75]
+    \node[scale=\scl] at (0,2.6) {\LARGE \textbf{Trou}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+
+  \begin{scope}[xshift=22.7 cm,yshift=23.5cm,scale=0.65]
+    \node[scale=\scl] at (0,2.6) {\large \textbf{Particules}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+%
+%
+%
+%      PANNEAU  THERMOSTATS
+%
+  \fill[panneaucontroles] (20.1,5.5) rectangle (27.6,21.3);
+ % \fill[panneaucontroles] (20.1,4.5) rectangle (27.6,23.7);
+
+  \begin{scope}[xshift=22.7 cm,yshift=18.5cm]
+    \fill[petitbouton] (3.5,-2.05) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-1.35) {\Large{2 T.}};
+    \fill[petitbouton] (3.5,-0.55) circle (0.3cm);
+    \node[scale=\scl] at (3.5,0.05) {\Large{1 T.}};
+    \fill[petitbouton] (3.5,0.85) circle (0.3cm);
+    \node[scale=\scl] at (3.5,1.55) {\Large{Arrêt}};
+  %  \fill[petitbouton] (3.5,2.35) circle (0.3cm);
+  %  \node[scale=\scl] at (3.5,2.95) {\Large{Marche}};
+  \end{scope}
+
+  \begin{scope}[xshift=22.7 cm,yshift=18cm,scale=0.85]
+    \node[scale=\scl] at (0,2.6) {\LARGE \textbf{Thermostat}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+
+%
+%      PANNEAU  DROITE GAUCHE
+%
+  \begin{scope}[xshift=26.2 cm,yshift=6.0cm]
+   % Droite
+    \fill[petitbouton] (0,0.9) circle (0.3cm);
+    \node[scale=\scl] at (0,1.6) {\Large{Arrêt}};
+    \fill[petitbouton] (0,2.5) circle (0.3cm);
+    \node[scale=\scl] at (0,3.2) {\Large{Marche}};
+	% Gauche
+    \fill[petitbouton] (0,6.0) circle (0.3cm);
+    \node[scale=\scl] at (0,6.7) {\Large{Arrêt}};
+    \fill[petitbouton] (0,7.6) circle (0.3cm);
+    \node[scale=\scl] at (0,8.3) {\Large{Marche}};
+  \end{scope}
+  \begin{scope}[xshift=22.7 cm,yshift=12.9cm,scale=0.85]
+    \node[scale=\scl] at (0,2.6) {\LARGE \textbf{Gauche}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+  \begin{scope}[xshift=22.7 cm,yshift=7.8cm,scale=0.85]
+    \node[scale=\scl] at (0,2.6) {\LARGE \textbf{Droite}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/8,45/7,75/6,105/5,135/4,165/3,195/2,225/1,255/0,285/,315/10,345/9} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+%
+\end{tikzpicture}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      PANNEAU  BAS 1
+%
+  \fill[panneaucontroles] (-20.5,-4.5) rectangle (19.1,-0.2);
+%       Réinitialisation
+  \begin{scope}[xshift=-19.7 cm,yshift=-4.3cm]
+  \draw[blue,rounded corners,thin] (-0.5,0.2) rectangle (11.2,3.8);
+
+    \node[scale=\scl] at (5.1,3.3) {\LARGE \textbf{Initialisation}};
+
+    \node[scale=\scl] at (2.1,0.8) {\Large \textbf{Position}};
+
+    \fill[blue!50!black!20!,draw=black,thick] (0.5,2.0) circle (0.43cm);
+    \node[scale=\scl] at (0.5,2.0) {\Large \textbf{1}};
+    \fill[blue!50!black!20!,draw=black,thick] (1.9,2.0) circle (0.43cm);
+    \node[scale=\scl] at (1.9,2.0) {\Large \textbf{2}};
+    \fill[blue!50!black!20!,draw=black,thick] (3.3,2.0) circle (0.43cm);
+    \node[scale=\scl] at (3.3,2.0) {\Large \textbf{3}};
+
+    \node[scale=\scl] at (8.1,0.8) {\Large \textbf{Parametres}};
+
+    \fill[blue!50!black!20!,draw=black,thick] (6.0,2.0) circle (0.43cm);
+    \node[scale=\scl] at (6.0,2.0) {\Large \textbf{1}};
+    \fill[blue!50!black!20!,draw=black,thick] (7.4,2.0) circle (0.43cm);
+    \node[scale=\scl] at (7.4,2.0) {\Large \textbf{2}};
+    \fill[blue!50!black!20!,draw=black,thick] (8.8,2.0) circle (0.43cm);
+    \node[scale=\scl] at (8.8,2.0) {\Large \textbf{3}};
+    \fill[blue!50!black!20!,draw=black,thick] (10.2,2.0) circle (0.43cm);
+    \node[scale=\scl] at (10.2,2.0) {\Large \textbf{4}};
+
+  \end{scope}
+%
+  \begin{scope}[xshift=25.7 cm,yshift=-3.9cm]
+   % Vumètre
+\fill[lumiereeteinte] (0,0.4) rectangle (1,3.4);
+\foreach \i in {0.9,1.4,...,3.4} \draw[lumiereeteinte] (0,\i)-- (1,\i);
+%
+  \end{scope}
+%
+%      PANNEAU  PARTICULE
+%
+  \fill[panneaucontroles] (20.1,18) rectangle (27.6,23.7);
+  \begin{scope}[xshift=22.7 cm,yshift=20.5cm]
+    \fill[petitbouton] (3.5,-1.5) circle (0.3cm);
+    \node[scale=\scl] at (3.5,-0.85) {\Large{.}};
+    \fill[petitbouton] (3.5,0.1) circle (0.3cm);
+    \node[scale=\scl] at (3.5,0.8) {\Large{.}};
+    \fill[petitbouton] (3.5,1.7) circle (0.3cm);
+    \node[scale=\scl] at (3.5,2.4) {\Large{.}};
+
+    \node[scale=\scl] at (0,2.6) {\LARGE \textbf{Particule}};
+    \clip[rounded corners] (-2,-2) rectangle (2,2);
+    \fill[black!30!,rounded corners,draw=black,thick] (-2,-2) rectangle (2,2);
+    \draw[very thick,rounded corners](-2,-2) rectangle (2,2);
+    \draw[thick] (0,0) circle (1.0);
+    \foreach \i in {0,30,...,330} \draw[thick] (\i:1.2)--(\i:2.5);
+    \foreach \i/\j in {15/4,45/2.3,75/1.3,105/.7,135/.4,165/.25,195/.1,225/.07,255/.04,285/25,315/13,345/7} \node[scale=\scl,black] at (\i:1.7) {\j};
+    \fill[blue!30!black!60!,draw=black,thick] (0,0) circle (0.8cm);
+  \end{scope}
+%
+    \foreach \i in {0.5,1,...,2}
+{
+\fill[blue!50!black!20!,draw=black,thick] (13.7,\i) rectangle (14.7,( \i + 0.3 ));
+\fill[blue!50!black!20!,draw=black,thick] (15.3,\i) rectangle (16.3,( \i + 0.3 ));
+\fill[blue!50!black!20!,draw=black,thick] (17.0,\i) rectangle (18.0,( \i + 0.3 ));
+}
+%
+%      PANNEAU  BAS 1
+%
+%  \fill[panneaucontroles] (-20.5,1.1) rectangle (5.5,5.1);
+%
+%
+  \begin{scope}[xshift=1.5 cm,yshift=1.1cm]
+   % Vumètre
+\def \bas {0.4}
+\def \haut {2.9}
+\fill[lumiereeteinte] (13.2,\bas) rectangle (14.2,\haut);
+\foreach \i in {0.9,1.4,...,2.9} \draw[lumiereeteinte] (13.2,\i)-- (14.2,\i);
+%
+\fill[lumiereeteinte] (14.9,\bas) rectangle (15.9,\haut);
+\foreach \i in {0.9,1.4,...,2.9} \draw[lumiereeteinte] (14.9,\i)-- (15.9,\i);
+%
+\fill[lumiereeteinte] (16.6,\bas) rectangle (17.6,\haut);
+\foreach \i in {0.9,1.4,...,2.9} \draw[lumiereeteinte] (16.6,\i)-- (17.6,\i);
+%
+  \end{scope}
+%
+%       Réinitialisation
+  \begin{scope}[xshift=-19.7 cm,yshift=1.1cm]
+
+  %panneaucontroles/.style={yellow!30!brown!20!,rounded corners,,thick},
+  \draw[blue,rounded corners,thin] (-0.5,0.2) rectangle (11.2,3.8);
+
+    \node[scale=\scl] at (5.1,3.3) {\LARGE \textbf{Initialisation}};
+
+    \node[scale=\scl] at (2.1,0.8) {\Large \textbf{Position}};
+
+    \fill[blue!50!black!20!,draw=black,thick] (0.5,2.0) circle (0.43cm);
+    \node[scale=\scl] at (0.5,2.0) {\Large \textbf{1}};
+    \fill[blue!50!black!20!,draw=black,thick] (1.9,2.0) circle (0.43cm);
+    \node[scale=\scl] at (1.9,2.0) {\Large \textbf{2}};
+    \fill[blue!50!black!20!,draw=black,thick] (3.3,2.0) circle (0.43cm);
+    \node[scale=\scl] at (3.3,2.0) {\Large \textbf{3}};
+
+    \node[scale=\scl] at (8.1,0.8) {\Large \textbf{Parametres}};
+
+    \fill[blue!50!black!20!,draw=black,thick] (6.0,2.0) circle (0.43cm);
+    \node[scale=\scl] at (6.0,2.0) {\Large \textbf{1}};
+    \fill[blue!50!black!20!,draw=black,thick] (7.4,2.0) circle (0.43cm);
+    \node[scale=\scl] at (7.4,2.0) {\Large \textbf{2}};
+    \fill[blue!50!black!20!,draw=black,thick] (8.8,2.0) circle (0.43cm);
+    \node[scale=\scl] at (8.8,2.0) {\Large \textbf{3}};
+    \fill[blue!50!black!20!,draw=black,thick] (10.2,2.0) circle (0.43cm);
+    \node[scale=\scl] at (10.2,2.0) {\Large \textbf{4}};
+
+  \end{scope}
+%
+%
+%       Vitesse de la simulation
+%
+  \begin{scope}[xshift=-11.5 cm,yshift=1.1cm]
+   % \fill[red,draw=yellow!40!red!60!,thick] (0.0,0.8) circle (0.3cm);
+    \node[scale=\scl] at (9.1,3.3) {\LARGE \textbf{Simulation}};
+
+   % \draw[draw=black!20!brown!80!,very thick] (2.0,0.8)-- (4.1,0.8);
+
+
+   % \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (4.4,1.45)-- (4.4,2.55)-- (3.5,2.0)-- cycle;
+
+        % Pause
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=2pt] (5.35,1.6) rectangle (5.7,2.4);
+    \fill[blue!50!black!20!,draw=black,rounded corners=2pt] (6.5,2.0)-- (5.8,1.55)-- (5.8,2.45)-- cycle;
+    \fill[lumiereeteinte] (5.75,0.8) circle (0.3cm);
+
+        % Min
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (8.1,1.45)-- (8.1,2.55)-- (7.2,2.0)-- cycle;
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (8.4,1.45)-- (8.4,2.55)-- (7.5,2.0)-- cycle;
+   % \fill[blue!50!black!20!,draw=black,rounded corners=1pt] (8.1,2.0)-- (7.3,1.5)-- (7.3,2.5)-- cycle;
+   % \fill[lumiereeteinte] (7.7,0.8) circle (0.3cm);
+
+        % Moins
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (9.8,1.45)-- (9.8,2.55)-- (8.9,2.0)-- cycle;
+
+        % plus
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (11.5,2.0)-- (10.6,1.45)-- (10.6,2.55)-- cycle;
+
+        % Max
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (13.3,2.0)-- (12.4,1.45)-- (12.4,2.55)-- cycle;
+    \fill[blue!50!black!20!,draw=black,thick,rounded corners=6pt] (13.0,2.0)-- (12.1,1.45)-- (12.1,2.55)-- cycle;
+
+    \draw[draw=black!20!brown!80!,very thick] (7.9,0.8)-- (12.5,0.8);
+
+  \end{scope}
+%
