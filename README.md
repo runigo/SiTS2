@@ -90,9 +90,9 @@ La touche entrée change le mode de l'évolution.
 
 LICENCE
 
-Copyright août 2019, Stephan Runigo
+Copyright septembre 2019, Stephan Runigo
 runigo@free.fr
-SiTS2  2.2 simulateur de thermodynamique statistique
+SiTS2  2.3 simulateur de thermodynamique statistique
 Ce logiciel est un programme informatique servant à simuler un gaz et à
 en donner une représentation graphique. Il permet d'observer une détente
 de Joule ainsi que des transferts thermiques avec des thermostats.
