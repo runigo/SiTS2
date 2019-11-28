@@ -52,6 +52,8 @@ termes.
 
 #define TEMPS_AFFICHAGE 110 // Durée entre les affichages en ms
 
+#define MEMOIRE_CHRONO 10 // Nombre de points en mémoire des durées chronométrées
+
 #define FENETRE_X 892 // Largeur de la fenêtre
 #define FENETRE_Y 653 // Hauteur de la fenêtre
 

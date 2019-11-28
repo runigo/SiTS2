@@ -1,9 +1,10 @@
 /*
-Copyright novembre 2019, Stephan Runigo
+Copyright décembre 2019, Stephan Runigo
 runigo@free.fr
-SimFoule 2.1  simulateur de foule
-Ce logiciel est un programme informatique servant à simuler l'évacuation
-d'une foule dans un batiment et à en donner une représentation graphique.
+SiTS 2.3  simulateur de thermodynamique statistique
+Ce logiciel est un programme informatique servant à simuler un gaz et à
+en donner une représentation graphique. Il permet d'observer une détente
+de Joule ainsi que des transferts thermiques avec des thermostats.
 Ce logiciel est régi par la licence CeCILL soumise au droit français et
 respectant les principes de diffusion des logiciels libres. Vous pouvez
 utiliser, modifier et/ou redistribuer ce programme sous les conditions
@@ -29,37 +30,15 @@ pris connaissance de la licence CeCILL, et que vous en avez accepté les
 termes.
 */
 
-// Librement inspiré de 
-// http://piconano2015.wixsite.com/soft/code
-// Copyright 2015 par PicoSoft.
+#ifndef _CONTROLEURCLAVIER_
+#define _CONTROLEURCLAVIER_
 
-#ifndef _HORLOGE_
-#define _HORLOGE_
+#include "../controleur/controleur.h"
+#include "../controleur/controleurSouris.h"
 
-#include "interface.h"
-
-typedef struct HorlogeT horlogeT;
-	struct HorlogeT
-		{
-		SDL_TimerID horloge;	// timer principal
-
-		long int depart;	// Départ du chronomètre
-
-		int projection[MEMOIRE_CHRONO];	// Durée de la projection du système sur le graphique
-		int evolution[MEMOIRE_CHRONO];	// Durée de l'évolution du système
-		int graphique[MEMOIRE_CHRONO];	// Durée de la construction graphique
-		int total[MEMOIRE_CHRONO];	// Durée total de l'évolution du controleur
-
-		int index; // instant présent des mémoire
-		};
-
-Uint32 horlogeEvenement(Uint32 it, horlogeT * horloge);
-
-int horlogeCreation(horlogeT * horloge);
-int horlogeSuppression(horlogeT * horloge);
-
-int horlogeChrono(horlogeT * horloge, int etape);
-
-int horlogeAffiche(horlogeT * horloge);
+int controleurClavier(controleurT * controleur);
+int controleurClavierMaj(controleurT * controleur);
+int controleurClavierCtrl(controleurT * controleur);
+int controleurClavierCtrlMaj(controleurT * controleur);
 
 #endif

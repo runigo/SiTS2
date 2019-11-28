@@ -38,14 +38,20 @@ OBJDIR = ./obj
 
 all : $(EXEC)
 
-$(EXEC) : $(OBJDIR)/principale.o $(OBJDIR)/controleur.o $(OBJDIR)/projection.o $(OBJDIR)/options.o $(OBJDIR)/interface.o $(OBJDIR)/horloge.o $(OBJDIR)/commandes.o $(OBJDIR)/capteurs.o $(OBJDIR)/graphique.o $(OBJDIR)/graphe.o $(OBJDIR)/observables.o $(OBJDIR)/systeme.o $(OBJDIR)/thermostat.o $(OBJDIR)/mobile.o $(OBJDIR)/montage.o $(OBJDIR)/vecteur.o $(OBJDIR)/aleatoire.o
-	$(CC) -g $(OBJDIR)/principale.o $(OBJDIR)/controleur.o $(OBJDIR)/projection.o $(OBJDIR)/options.o $(OBJDIR)/interface.o $(OBJDIR)/horloge.o $(OBJDIR)/commandes.o $(OBJDIR)/capteurs.o $(OBJDIR)/graphique.o $(OBJDIR)/graphe.o $(OBJDIR)/observables.o $(OBJDIR)/systeme.o $(OBJDIR)/thermostat.o $(OBJDIR)/mobile.o $(OBJDIR)/montage.o $(OBJDIR)/vecteur.o $(OBJDIR)/aleatoire.o ` sdl2-config --libs` $(LDFLAGS) -o $@
+$(EXEC) : $(OBJDIR)/principale.o $(OBJDIR)/controleur.o $(OBJDIR)/controleurClavier.o $(OBJDIR)/controleurSouris.o $(OBJDIR)/projection.o $(OBJDIR)/options.o $(OBJDIR)/interface.o $(OBJDIR)/horloge.o $(OBJDIR)/commandes.o $(OBJDIR)/capteurs.o $(OBJDIR)/graphique.o $(OBJDIR)/graphe.o $(OBJDIR)/observables.o $(OBJDIR)/systeme.o $(OBJDIR)/thermostat.o $(OBJDIR)/mobile.o $(OBJDIR)/montage.o $(OBJDIR)/vecteur.o $(OBJDIR)/aleatoire.o
+	$(CC) -g $(OBJDIR)/principale.o $(OBJDIR)/controleur.o $(OBJDIR)/controleurClavier.o $(OBJDIR)/controleurSouris.o $(OBJDIR)/projection.o $(OBJDIR)/options.o $(OBJDIR)/interface.o $(OBJDIR)/horloge.o $(OBJDIR)/commandes.o $(OBJDIR)/capteurs.o $(OBJDIR)/graphique.o $(OBJDIR)/graphe.o $(OBJDIR)/observables.o $(OBJDIR)/systeme.o $(OBJDIR)/thermostat.o $(OBJDIR)/mobile.o $(OBJDIR)/montage.o $(OBJDIR)/vecteur.o $(OBJDIR)/aleatoire.o ` sdl2-config --libs` $(LDFLAGS) -o $@
 
 $(OBJDIR)/principale.o : controleur/principale.c controleur/principale.h
 	$(CC) -c -g controleur/principale.c $(CFLAGS) -o $@
 
 $(OBJDIR)/controleur.o : controleur/controleur.c controleur/controleur.h
 	$(CC) -c -g controleur/controleur.c $(CFLAGS) -o $@
+
+$(OBJDIR)/controleurClavier.o : controleur/controleurClavier.c controleur/controleurClavier.h
+	$(CC) -c -g controleur/controleurClavier.c $(CFLAGS) -o $@
+
+$(OBJDIR)/controleurSouris.o : controleur/controleurSouris.c controleur/controleurSouris.h
+	$(CC) -c -g controleur/controleurSouris.c $(CFLAGS) -o $@
 
 $(OBJDIR)/projection.o : controleur/projection.c controleur/projection.h
 	$(CC) -c -g controleur/projection.c $(CFLAGS) -o $@
