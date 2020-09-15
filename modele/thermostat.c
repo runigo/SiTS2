@@ -206,7 +206,10 @@ void thermostatChangeEtatGauche(thermostatT * thermostat, int etat)
 			(*thermostat).etatGauche = 1;
 			fprintf(stderr, "Thermostat gauche allumé\n");
 			}
+			break;
 		default:
+			(*thermostat).etatGauche = 0;
+			fprintf(stderr, "ERREUR : Thermostat gauche éteint\n");
 			;
 		}
 	return;
@@ -236,6 +239,7 @@ void thermostatChangeEtatDroite(thermostatT * thermostat, int etat)
 			(*thermostat).etatDroite = 1;
 			fprintf(stderr, "Thermostat droit allumé\n");
 			}
+			break;
 		default:
 			(*thermostat).etatDroite = 0;
 			fprintf(stderr, "ERREUR : Thermostat droit éteint\n");
