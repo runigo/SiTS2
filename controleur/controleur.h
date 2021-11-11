@@ -1,7 +1,7 @@
 /*
-Copyright décembre 2019, Stephan Runigo
+Copyright novembre 2021, Stephan Runigo
 runigo@free.fr
-SiTS 2.3  simulateur de thermodynamique statistique
+SiTS 2.3.2  simulateur de thermodynamique statistique
 Ce logiciel est un programme informatique servant à simuler un gaz et à
 en donner une représentation graphique. Il permet d'observer une détente
 de Joule ainsi que des transferts thermiques avec des thermostats.
@@ -93,5 +93,7 @@ int controleurSimulationGraphique(controleurT * control);
 
 void controleurChangeMode(controleurT * controleur);
 void controleurChangeVitesse(controleurT * controleur, float facteur);
+
+void controleurPostReinitialisation(controleurT * controleur);
 
 #endif
