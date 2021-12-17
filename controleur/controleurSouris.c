@@ -59,7 +59,8 @@ void controleurSourisBouton(controleurT * controleur, int appui)
 			{
 			if((*controleur).commandes.sourisX>(*controleur).commandes.boutons)
 				{
-				controleurSourisCommandes(controleur, 2);
+				if(controleurSourisCommandes(controleur, 2)==1) controleurPostReinitialisation(controleur);
+				//controleurSourisCommandes(controleur, 2);
 				}
 			else
 				{
@@ -84,6 +85,7 @@ void controleurSourisBouton(controleurT * controleur, int appui)
 int controleurSourisCommandes(controleurT * controleur, int zone)
 	{
 	int commande;
+	int reinitialisation = 0;
 	if(zone==2)
 		{
 		commande = commandeBoutons(&(*controleur).commandes);
@@ -124,7 +126,9 @@ int controleurSourisCommandes(controleurT * controleur, int zone)
 			case 13: // 
 				controleurChangeVitesse(controleur, -10);break;
 			case 14: // 
-				systemeInitialisePosition(&(*controleur).systeme, 0);break;
+				systemeInitialisePosition(&(*controleur).systeme, 0);
+				controleurPostReinitialisation(controleur);
+				break;
 			case 15: // 
 				controleurInitialiseParametres(controleur, 3);break;
 			case 16: // 
@@ -184,7 +188,7 @@ int controleurSourisCommandes(controleurT * controleur, int zone)
 				;
 			}
 		}
-	return 0;
+	return reinitialisation;
 	}
 
 int controleurSourisDefile(controleurT * controleur)
